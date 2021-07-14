@@ -1,9 +1,9 @@
 // 필수 모듈
 
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io').listen(server)
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 
 // 파일 요청
@@ -19,6 +19,33 @@ app.get('/',function(req,res){
 });
 
 // 서버가 통신해야하는 포트를 지정
-server.listen(8081,function(){
+server.listen(8081,() => {
     console.log('Listening on '+server.address().port);
 });
+
+server.lastPlayderID = 0; // 새 플레이어에게 할당 된 마지막 ID를 추적합니다.
+
+io.on('connection',function(socket){
+    socket.on('newplayer',function(){
+        socket.player = {
+            id: server.lastPlayderID++,
+            x: randomInt(100,400),
+            y: randomInt(100,400)
+        };
+        socket.emit('allplayers',getAllPlayers());
+        socket.broadcast.emit('newplayer',socket.player);
+    });
+});
+
+const getAllPlayers = () => {
+    var players = [];
+    Object.keys(io.sockets.connected).forEach(function(socketID){
+        var player = io.sockets.connected[socketID].player;
+        if(player) players.push(player);
+    });
+    return players;
+}
+
+const randomInt = () => (low, high) => {
+    return Math.floor(Math.random() * (high - low) + low);
+}
