@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "http": "0.0.1-security"
+    "http": "0.0.1-security",
+    "phaser": "^3.55.2",
+    "socket.io": "^4.1.3"
   }
 }
