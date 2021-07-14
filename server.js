@@ -23,7 +23,7 @@ server.listen(8081,() => {
     console.log('Listening on '+server.address().port);
 });
 
-server.lastPlayderID = 0; // 새 플레이어에게 할당 된 마지막 ID를 추적합니다.
+server.lastPlayderID = 0; // 새 플레이어에게 할당 된 마지막 ID를 추적
 
 io.on('connection',function(socket){
     socket.on('newplayer',function(){
