@@ -11,3 +11,7 @@
 > -  javascript에 능숙해지기
 > - C#,C++ 기반의 게임 서버와 비교
 > - Socket.io 단점 찾기
+
+
+
+> [참조 페이지](https://www.dynetisgames.com/2017/03/06/how-to-make-a-multiplayer-online-game-with-phaser-socket-io-and-node-js/)
